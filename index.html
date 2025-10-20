@@ -1,13 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZIKO</title>
-    <link rel="stylesheet" href="Style.css">
+  <link rel="stylesheet" href="Style.css">
+  
+<meta charset="UTF-8">
+<title>ZIKO</title>
+
+
+<link rel="icon" href="astronomical.svg">
+
+
+<style>
+  :root {
+    --main-bg-color: rgb(44, 27, 109); /* اللون الافتراضي */
+    --main-text-color: black;
+  }
+
+  body {
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    transition: background-color 0.3s, color 0.3s;
+    
+  }
+
+  header {
+    padding: 20px;
+    text-align: center;
+    background-color: var(--main-bg-color);
+  }
+</style>
 </head>
 <body>
-    <header>
+<hr>
+
+<div style="margin:20px; text-align:center;">
+  <label class="co" >Play in the Color  </label>
+  <input type="color" id="bgColor" value="#ffffff">
+<br>
+</div>
+
+<script>
+  const bgColor = document.getElementById('bgColor');
+  const textColor = document.getElementById('textColor');
+
+  bgColor.addEventListener('input', () => {
+    document.documentElement.style.setProperty('--main-bg-color', bgColor.value);
+  });
+
+  textColor.addEventListener('input', () => {
+    document.documentElement.style.setProperty('--main-text-color', textColor.value);
+  });
+
+
+</script>
+
+  <header>
         <img class="Logo" src="astronomical.svg" alt="logo" width="70" height="70">
         <nav class="nav_links">
             <ul>
@@ -69,6 +116,5 @@
 
    
 <hr>
-
 </body>
 </html>
