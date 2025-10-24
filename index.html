@@ -1,77 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZIKO</title>
-    <link rel="stylesheet" href="Style.css">
-    <link rel="icon" href="Z.svg">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZIKO</title>
+  <link rel="stylesheet" href="Style.css">
+  <link rel="icon" href="Z.svg">
 </head>
 <body>
-    
-<header>
-        <img class="Logo" src="Z.svg" alt="logo" width="70" height="70">
-        <nav class="nav_links">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html">About</a></li>
-                <li><a href="index.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    
-   <section class="name">
+  <!-- زر تبديل الثيم -->
+  <button id="theme-toggle" class="theme-btn" title="Change theme">
+  <span id="theme-icon">🌙</span>
+</button>
+
+
+
+  <!-- الهيدر -->
+  <header>
+    <img class="Logo" src="Z.svg" alt="logo" width="70" height="70">
+    <nav class="nav_links">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html">About</a></li>
+        <li><a href="index.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- الاسم -->
+  <section class="name">
     <div>
-        <h1>
-            Im ZIKO
-        </h1>
+      <h1>IM ZIKO</h1>
     </div>
-   </section>
+  </section>
 
-   <hr>
-     
- <div>
-             <ul>
-                <li><P><A class="Links" HREF="https://www.youtube.com/@Z8K0" target="_blank" >YouTube</A></P></li>
-            </ul>
-</div>
+  <hr>
 
-<br>
-
-<div>
+  <!-- الروابط الاجتماعية -->
+  <div class="social-links">
     <ul>
-        <li><P><A class="Links" HREF="https://www.instagram.com/n3c0_/" target="_blank" >Instagram</A ></P></li>
+      <li><p><a class="Links" href="https://www.youtube.com/@Z8K0" target="_blank">YouTube</a></p></li>
+      <li><p><a class="Links" href="https://www.instagram.com/n3c0_/" target="_blank">Instagram</a></p></li>
+      <li><p><a class="Links" href="https://t.me/PO8NT" target="_blank">Telegram</a></p></li>
+      <li><p><a class="Links" href="https://discord.com/invite/JZN3GJaDpm" target="_blank">Discord</a></p></li>
     </ul>
-</div>
+  </div>
 
-<br>
-
-<div>
-    <ul>
-        <li><P><A class="Links" HREF="https://t.me/PO8NT" target="_blank" >Telegram</A></P></li>
-    </ul>
-</div>
-
-<br>
-
-<div>
-    <ul>
-        <li><P><A class="Links" HREF="https://discord.com/invite/JZN3GJaDpm" target="_blank" >Discord</A></P></li>
-    </ul>
-</div>
-<hr>
-<section class="name">
+  <section class="name">
     <div>
-        <h1>
-            X D
-        </h1>
+      <h1>X D</h1>
     </div>
-   </section>
+  </section>
 
-   
+  <hr>
 
+  <!-- سكربت تبديل الثيم -->
+  
+  <script>
+  const themeBtn = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  // تحميل التفضيل المحفوظ أو النظام
+  if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !prefersDark)) {
+    document.body.classList.add('light-mode');
+    themeIcon.textContent = '☀️';
+  }
+
+  // عند الضغط على الزر
+  themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    const isLight = document.body.classList.contains('light-mode');
+    themeIcon.textContent = isLight ? '☀️' : '🌙';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+</script>
+
+  </script>
 
 </body>
 </html>

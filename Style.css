@@ -157,3 +157,84 @@ div ul {
     overflow-x: hidden; /* يمنع التمرير الأفقي */
   }
 }
+/* زر تبديل الثيم */
+.theme-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid #00fff9;
+  background: radial-gradient(circle at center, #00fff9 0%, #0f0f0f 80%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #00fff9;
+  z-index: 999;
+}
+
+.theme-btn:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 25px #ff00ff, 0 0 35px #00fff9;
+}
+
+/* الوضع الفاتح */
+.light-mode {
+  background: #f7f7f7;
+  color: #111;
+}
+
+.light-mode header {
+  background: #ffffff;
+  border-bottom: 2px solid #00bcd4;
+  box-shadow: 0 0 20px rgba(0, 188, 212, 0.3);
+}
+
+.light-mode .Links {
+  color: #00bcd4;
+  border-color: #00bcd4;
+}
+
+.light-mode .Links:hover {
+  background-color: rgba(0, 188, 212, 0.1);
+  box-shadow: 0 0 15px #00bcd4;
+}
+
+/* زر الثيم في الوضع الفاتح */
+.light-mode .theme-btn {
+  border-color: #ff00ff;
+  background: radial-gradient(circle at center, #ff00ff 0%, #ffffff 80%);
+  box-shadow: 0 0 10px #ff00ff;
+}
+/* الأيقونة داخل الزر */
+.theme-btn #theme-icon {
+  font-size: 1.3em;
+  color: #00fff9;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.theme-btn:hover #theme-icon {
+  transform: rotate(25deg) scale(1.1);
+  color: #ff00ff;
+}
+
+/* الوضع الفاتح - أيقونة شمس */
+.light-mode .theme-btn #theme-icon {
+  color: #ff00ff;
+}
+/* الأيقونة داخل الزر */
+.theme-btn #theme-icon {
+  font-size: 1.3em;
+  color: #00fff9;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.theme-btn:hover #theme-icon {
+  transform: rotate(25deg) scale(1.1);
+  color: #ff00ff;
+}
+
+/* الوضع الفاتح - أيقونة شمس */
+.light-mode .theme-btn #theme-icon {
+  color: #ff00ff;
+}
