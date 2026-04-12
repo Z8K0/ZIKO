@@ -1,240 +1,302 @@
-/* Style.css */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZIKO | THE INFINITY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Plus+Jakarta+Sans:wght@200;400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #00fff9;
+            --secondary: #ff00c8;
+            --bg-deep: #020205;
+            --glass-bright: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-logo: 'Syncopate', sans-serif;
+        }
 
-/* إعدادات عامة */
-body {
-  margin: 0;
-  padding: 0;
-  background: radial-gradient(circle at top, #000010 0%, #000 100%);
-  color: #e0e0e0;
-  font-family: 'Orbitron', sans-serif;
-  text-align: center;
-  overflow-x: hidden;
-}
+        .light-mode {
+            --bg-deep: #f5f7fa;
+            --glass-bright: rgba(0, 0, 0, 0.03);
+            --border: rgba(0, 0, 0, 0.08);
+            --primary: #0062ff;
+            --secondary: #d400ff;
+        }
 
-/* تأثير glitch للنص */
-@keyframes glitch {
-  0% { text-shadow: 2px 2px #ff00c8, -2px -2px #00fff9; }
-  25% { text-shadow: -2px 0px #ff00c8, 2px 2px #00fff9; }
-  50% { text-shadow: 2px -2px #ff00c8, -2px 2px #00fff9; }
-  75% { text-shadow: -2px -2px #ff00c8, 2px 0px #00fff9; }
-  100% { text-shadow: 2px 2px #ff00c8, -2px -2px #00fff9; }
-}
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; } /* مؤشر ماوس مخصص */
 
-/* الهيدر */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 25px 80px;
-  background-color: rgba(10, 10, 15, 0.8);
-  border-bottom: 2px solid #00fff9;
-  box-shadow: 0 0 25px #00fff9;
-  backdrop-filter: blur(5px);
-}
+        body {
+            background-color: var(--bg-deep);
+            color: #fff;
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-.Logo {
-  transition: transform 0.4s ease, filter 0.4s ease;
-  filter: drop-shadow(0 0 15px #00fff9);
-}
+        .light-mode body { color: #1a1a1a; }
 
-.Logo:hover {
-  transform: rotate(15deg) scale(1.1);
-  filter: drop-shadow(0 0 25px #ff00c8);
-}
+        /* ===== خلفية الجزيئات المتحركة ===== */
+        #canvas-bg {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: -1;
+            width: 100%; height: 100%;
+        }
 
-/* روابط التنقل */
-.nav_links ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 40px;
-}
+        /* ===== الهيدر السينمائي ===== */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 10%;
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 1000;
+        }
 
-.nav_links a {
-  color: #e0e0e0;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.1em;
-  letter-spacing: 1px;
-  transition: 0.3s ease;
-}
+        .Logo-Wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
 
-.nav_links a:hover {
-  color: #00fff9;
-  text-shadow: 0 0 15px #00fff9;
-}
+        .Logo-Icon {
+            width: 50px;
+            filter: drop-shadow(0 0 10px var(--primary));
+            animation: pulse 3s infinite;
+        }
 
-/* اسم */
-.name h1 {
-  font-size: 3.5em;
-  margin-top: 80px;
-  color: #fff;
-  text-transform: uppercase;
-  animation: glitch 1.5s infinite;
-}
+        .Logo-Text {
+            font-family: var(--font-logo);
+            font-weight: 700;
+            letter-spacing: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-/* الروابط */
-.Links {
-  display: inline-block;
-  margin: 20px;
-  padding: 12px 30px;
-  border: 2px solid #00fff9;
-  border-radius: 10px;
-  color: #00fff9;
-  text-decoration: none;
-  font-size: 1.3em;
-  letter-spacing: 1px;
-  transition: 0.3s ease;
-  text-shadow: 0 0 10px #00fff9;
-  position: relative;
-  overflow: hidden;
-}
+        /* ===== قسم الـ Hero (فخامة مطلقة) ===== */
+        .hero {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
 
-/* تأثير النيون عند hover */
-.Links::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(0,255,255,0.5), transparent);
-  transition: 0.5s;
-}
+        .hero h1 {
+            font-family: var(--font-logo);
+            font-size: clamp(3rem, 12vw, 7rem);
+            line-height: 1;
+            background: linear-gradient(180deg, #fff 30%, rgba(255,255,255,0.1) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
 
-.Links:hover::before {
-  left: 100%;
-}
+        .hero p {
+            letter-spacing: 10px;
+            font-weight: 200;
+            text-transform: uppercase;
+            opacity: 0.6;
+        }
 
-.Links:hover {
-  background-color: rgba(0,255,255,0.1);
-  color: #ff00c8;
-  box-shadow: 0 0 25px #00fff9, 0 0 40px #ff00c8;
-  border-color: #ff00c8;
-}
+        /* ===== الروابط (أزرار فضائية) ===== */
+        .grid-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 40px;
+        }
 
-/* الفاصل */
-hr {
-  width: 60%;
-  margin: 60px auto;
-  border: none;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #00fff9, transparent);
-  box-shadow: 0 0 20px #00fff9;
-}
-div ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  text-align: center;
-}
-/* جعل التصميم متجاوب (Responsive Design) */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-    text-align: center;
-  }
+        .Elite-Link {
+            background: var(--glass-bright);
+            border: 1px solid var(--border);
+            padding: 40px 20px;
+            border-radius: 24px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
 
-  .nav_links ul {
-    flex-direction: column;
-    gap: 10px;
-    padding: 0;
-  }
+        .Elite-Link i { font-size: 2.5rem; transition: 0.5s; }
 
-  .nav_links a {
-    font-size: 1em;
-    display: inline-block;
-  }
+        .Elite-Link::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transition: 0.5s;
+        }
 
-  .Logo {
-    margin-bottom: 10px;
-  }
+        .Elite-Link:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.07);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 20px rgba(0,255,249,0.2);
+        }
 
-  body {
-    overflow-x: hidden; /* يمنع التمرير الأفقي */
-  }
-}
-/* زر تبديل الثيم */
-.theme-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 2px solid #00fff9;
-  background: radial-gradient(circle at center, #00fff9 0%, #0f0f0f 80%);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 10px #00fff9;
-  z-index: 999;
-}
+        .Elite-Link:hover i { transform: rotateY(360deg); color: var(--primary); }
+        .Elite-Link:hover::before { left: 100%; }
 
-.theme-btn:hover {
-  transform: scale(1.15);
-  box-shadow: 0 0 25px #ff00ff, 0 0 35px #00fff9;
-}
+        /* ===== مؤشر الماوس المخصص (Luxury Touch) ===== */
+        #cursor-dot {
+            width: 8px; height: 8px; background: var(--primary);
+            position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999;
+        }
+        #cursor-outline {
+            width: 40px; height: 40px; border: 2px solid var(--primary);
+            position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998;
+            transition: 0.15s ease-out;
+        }
 
-/* الوضع الفاتح */
-.light-mode {
-  background: #f7f7f7;
-  color: #111;
-}
+        /* ===== زر الثيم السحري ===== */
+        .theme-toggle {
+            position: fixed; bottom: 40px; left: 40px;
+            width: 60px; height: 60px; border-radius: 20px;
+            background: var(--primary); border: none;
+            color: #000; font-size: 1.5rem; z-index: 2000;
+            box-shadow: 0 10px 30px rgba(0,255,249,0.4);
+        }
 
-.light-mode header {
-  background: #ffffff;
-  border-bottom: 2px solid #00bcd4;
-  box-shadow: 0 0 20px rgba(0, 188, 212, 0.3);
-}
+        @keyframes pulse {
+            0% { filter: drop-shadow(0 0 5px var(--primary)); }
+            50% { filter: drop-shadow(0 0 20px var(--primary)); }
+            100% { filter: drop-shadow(0 0 5px var(--primary)); }
+        }
 
-.light-mode .Links {
-  color: #00bcd4;
-  border-color: #00bcd4;
-}
+        @media (max-width: 768px) {
+            header { padding: 20px 5%; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
 
-.light-mode .Links:hover {
-  background-color: rgba(0, 188, 212, 0.1);
-  box-shadow: 0 0 15px #00bcd4;
-}
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
 
-/* زر الثيم في الوضع الفاتح */
-.light-mode .theme-btn {
-  border-color: #ff00ff;
-  background: radial-gradient(circle at center, #ff00ff 0%, #ffffff 80%);
-  box-shadow: 0 0 10px #ff00ff;
-}
-/* الأيقونة داخل الزر */
-.theme-btn #theme-icon {
-  font-size: 1.3em;
-  color: #00fff9;
-  transition: transform 0.3s ease, color 0.3s ease;
-}
+    <canvas id="canvas-bg"></canvas>
 
-.theme-btn:hover #theme-icon {
-  transform: rotate(25deg) scale(1.1);
-  color: #ff00ff;
-}
+    <button class="theme-toggle" id="themeBtn">
+        <i class="fas fa-bolt"></i>
+    </button>
 
-/* الوضع الفاتح - أيقونة شمس */
-.light-mode .theme-btn #theme-icon {
-  color: #ff00ff;
-}
-/* الأيقونة داخل الزر */
-.theme-btn #theme-icon {
-  font-size: 1.3em;
-  color: #00fff9;
-  transition: transform 0.3s ease, color 0.3s ease;
-}
+    <header>
+        <a href="#" class="Logo-Wrapper">
+            <img src="Z.svg" alt="Z" class="Logo-Icon">
+            <span class="Logo-Text">ZIKO</span>
+        </a>
+        <nav>
+            <ul style="list-style:none; display:flex; gap:40px;">
+                <li><a href="#" style="color:inherit; text-decoration:none; opacity:0.5;">ARCHIVE</a></li>
+                <li><a href="#" style="color:inherit; text-decoration:none; opacity:0.5;">LABS</a></li>
+                <li><a href="#" style="color:inherit; text-decoration:none; opacity:0.5;">WORLD</a></li>
+            </ul>
+        </nav>
+    </header>
 
-.theme-btn:hover #theme-icon {
-  transform: rotate(25deg) scale(1.1);
-  color: #ff00ff;
-}
+    <section class="hero">
+        <p>REDEFINING DIGITAL REALITY</p>
+        <h1>I'M ZIKO</h1>
+        <div style="width:2px; height:100px; background:linear-gradient(to bottom, var(--primary), transparent);"></div>
+    </section>
 
-/* الوضع الفاتح - أيقونة شمس */
-.light-mode .theme-btn #theme-icon {
-  color: #ff00ff;
-}
+    <div class="grid-links">
+        <a href="https://www.youtube.com/@Z8K0" class="Elite-Link" target="_blank">
+            <i class="fab fa-youtube"></i>
+            <span>THE CHANNEL</span>
+        </a>
+        <a href="https://www.instagram.com/n3c0_/" class="Elite-Link" target="_blank">
+            <i class="fab fa-instagram"></i>
+            <span>GALLERY</span>
+        </a>
+        <a href="https://t.me/PO8NT" class="Elite-Link" target="_blank">
+            <i class="fab fa-telegram-plane"></i>
+            <span>COMMUNITY</span>
+        </a>
+        <a href="https://discord.com/invite/JZN3GJaDpm" class="Elite-Link" target="_blank">
+            <i class="fab fa-discord"></i>
+            <span>THE SERVER</span>
+        </a>
+    </div>
+
+    <section class="hero" style="height:40vh">
+        <h1 style="font-size: 4rem;">X D</h1>
+    </section>
+
+    <script>
+        // --- تأثير الماوس المخصص ---
+        const dot = document.getElementById('cursor-dot');
+        const outline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+            outline.style.left = e.clientX - 16 + 'px';
+            outline.style.top = e.clientY - 16 + 'px';
+        });
+
+        // --- نظام الجزيئات الخلفية (Particles) ---
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary');
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < 100; i++) particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        init(); animate();
+
+        // --- تبديل الثيم ---
+        const themeBtn = document.getElementById('themeBtn');
+        themeBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('light-mode');
+        });
+    </script>
+</body>
+</html>

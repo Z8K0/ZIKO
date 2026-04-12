@@ -1,84 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZIKO</title>
-  <link rel="stylesheet" href="Style.css">
-  <link rel="icon" href="Z.svg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZIKO | Official</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --accent: #00f2ff; /* لون النيون الرئيسي */
+            --accent-2: #7000ff; /* لون البنفسجي العميق */
+            --bg-dark: #020205;
+            --card-glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --text-color: #ffffff;
+        }
+
+        .light-mode {
+            --bg-dark: #f8f9fa;
+            --card-glass: rgba(0, 0, 0, 0.05);
+            --border-glass: rgba(0, 0, 0, 0.1);
+            --text-color: #121212;
+            --accent: #007bff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* خلفية النجوم المتحركة الخفيفة */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(112, 0, 255, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        /* الهيدر */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .Logo-Area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .Logo-img {
+            filter: drop-shadow(0 0 8px var(--accent));
+            transition: 0.5s;
+        }
+
+        .Logo-img:hover {
+            transform: rotate(360deg);
+        }
+
+        .brand-name {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            background: linear-gradient(to right, var(--accent), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            opacity: 0.6;
+        }
+
+        nav a:hover {
+            opacity: 1;
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        /* قسم البطولة (Hero) */
+        .hero {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .hero .glitch {
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            letter-spacing: 5px;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        /* الروابط الاجتماعية */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+        }
+
+        .social-card {
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            padding: 30px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: var(--text-color);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-card i {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .social-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 242, 255, 0.2);
+        }
+
+        .social-card span {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* الفواصل المودرن */
+        .divider {
+            height: 1px;
+            width: 150px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            margin: 50px auto;
+        }
+
+        /* زر الثيم المتطور */
+        .theme-switch {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--accent);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: #000;
+            z-index: 1000;
+        }
+
+        /* التجاوب للهواتف */
+        @media (max-width: 768px) {
+            header { padding: 15px 5%; }
+            nav { display: none; }
+            .hero h1 { font-size: 3rem; }
+            .social-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- زر تبديل الثيم -->
-  <button id="theme-toggle" class="theme-btn" title="Change theme">
-  <span id="theme-icon">🌙</span>
-</button>
+    <button id="theme-btn" class="theme-switch">
+        <i id="theme-icon" class="fas fa-moon"></i>
+    </button>
 
+    <header>
+        <div class="Logo-Area">
+            <img src="Z.svg" alt="Z" class="Logo-img" width="45">
+            <span class="brand-name">ZIKO</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <main>
+        <section class="hero">
+            <div class="glitch">
+                <h1>I'M ZIKO</h1>
+            </div>
+            
+            <div class="divider"></div>
+        </section>
 
-  <!-- الهيدر -->
-  <header>
-    <img class="Logo" src="Z.svg" alt="logo" width="70" height="70">
-    <nav class="nav_links">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html">About</a></li>
-        <li><a href="index.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+        <div class="social-grid">
+            <a href="https://www.youtube.com/@Z8K0" class="social-card" target="_blank">
+                <i class="fab fa-youtube" style="color: #ff0000;"></i>
+                <span>YOUTUBE</span>
+            </a>
+            <a href="https://www.instagram.com/n3c0_/" class="social-card" target="_blank">
+                <i class="fab fa-instagram" style="color: #e4405f;"></i>
+                <span>INSTAGRAM</span>
+            </a>
+            <a href="https://t.me/PO8NT" class="social-card" target="_blank">
+                <i class="fab fa-telegram" style="color: #0088cc;"></i>
+                <span>TELEGRAM</span>
+            </a>
+            <a href="https://discord.com/invite/JZN3GJaDpm" class="social-card" target="_blank">
+                <i class="fab fa-discord" style="color: #5865f2;"></i>
+                <span>DISCORD</span>
+            </a>
+            <a href="https://tellonym.me/z8k0" class="social-card" target="_blank">
+                <i class="fas fa-comment-dots" style="color: #ff00c8;"></i>
+                <span>TELLONYM</span>
+            </a>
+        </div>
 
-  <!-- الاسم -->
-  <section class="name">
-    <div>
-      <h1>IM ZIKO</h1>
-    </div>
-  </section>
+        <section class="hero" style="height: 30vh;">
+             <div class="divider"></div>
+            <h1>X D</h1>
+        </section>
+    </main>
 
-  <hr>
+    <script>
+        const btn = document.getElementById('theme-btn');
+        const icon = document.getElementById('theme-icon');
+        const body = document.body;
 
-  <!-- الروابط الاجتماعية -->
-  <div class="social-links">
-    <ul>
-      <li><p><a class="Links" href="https://www.youtube.com/@Z8K0" target="_blank">YouTube</a></p></li>
-      <li><p><a class="Links" href="https://www.instagram.com/n3c0_/" target="_blank">Instagram</a></p></li>
-      <li><p><a class="Links" href="https://t.me/PO8NT" target="_blank">Telegram</a></p></li>
-      <li><p><a class="Links" href="https://discord.com/invite/JZN3GJaDpm" target="_blank">Discord</a></p></li>
-      <li><p><a class="Links" href="https://tellonym.me/z8k0" target="_blank">Tellonym</a></p></li>
-    </ul>
-  </div>
+        // التحقق من الثيم المخزن
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
 
-  <section class="name">
-    <div>
-      <h1>X D</h1>
-    </div>
-  </section>
+        btn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const isLight = body.classList.contains('light-mode');
+            
+            // تغيير الأيقونة مع تأثير دوران
+            icon.style.transform = "rotate(360deg)";
+            setTimeout(() => {
+                icon.classList.toggle('fa-moon');
+                icon.classList.toggle('fa-sun');
+                icon.style.transform = "rotate(0deg)";
+            }, 200);
 
-  <hr>
-
-  <!-- سكربت تبديل الثيم -->
-  
-  <script>
-  const themeBtn = document.getElementById('theme-toggle');
-  const themeIcon = document.getElementById('theme-icon');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-  // تحميل التفضيل المحفوظ أو النظام
-  if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !prefersDark)) {
-    document.body.classList.add('light-mode');
-    themeIcon.textContent = '☀️';
-  }
-
-  // عند الضغط على الزر
-  themeBtn.addEventListener('click', () => {
-    document.body.classList.toggle('light-mode');
-    const isLight = document.body.classList.contains('light-mode');
-    themeIcon.textContent = isLight ? '☀️' : '🌙';
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-  });
-</script>
-
-  </script>
-
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+    </script>
 </body>
 </html>
